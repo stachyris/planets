@@ -20,3 +20,14 @@ y[-c(1)]
 
 x[x %% 2 != 0]
 
+
+x[factor("e")]
+
+
+#lists
+
+x_l = list(c(1:5), letters)
+
+x_l[[1]]
+
+x_l[[1]]
