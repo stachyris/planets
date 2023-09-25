@@ -8,4 +8,3 @@ head(milage_cat, n=10)
 
 mtcars$mpg_2 <- milage_cat
 head(mtcars, n=10)
-
