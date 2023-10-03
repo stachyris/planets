@@ -1,6 +1,6 @@
 ---
-title: "class03Oct"
-format: html
+title: "class03Oct.qmd"
+format: pdf
 editor: visual
 ---
 
@@ -21,5 +21,70 @@ df = mutate_if(.tbl = df, .predicate = is.factor, .funs = as.character)
 str(df)
 ```
 
-```{}
+Strings and regular expressions
+
+
+
+```{r}
+(empty_str <- "")
+class(empty_str)
+```
+
+```{r}
+(empty_chr <- character(length = 0))
+class(empty_chr)
+```
+
+```{r}
+empty_chr[1] <- "first"
+empty_chr
+```
+
+```{r}
+empty_chr[4] <- "fourth"
+empty_chr
+```
+
+```{r}
+paste("I", "love", "R", sep = "-")
+```
+
+```{r}
+paste("X", 1:5, sep = ".", collapse = "-")
+```
+
+```{r}
+#readLines() to read text into R as is 
+top105 <- readLines("http://www.textfiles.com/music/ktop100.txt")
+head(top105, n = 20)
+```
+
+```{r}
+print(top105[1])
+```
+
+```{r}
+cat(top105[1:50], sep = " + ", file = "top105_cat_output.txt")
+```
+
+Regular Expression
+
+Pattern that describes a set of strings.
+
+```{r}
+help("regex")
+```
+
+metacharacters
+
+. \\ \| ( ) \[ { \$ \* + ?
+
+```{r}
+money = "$money"
+sub(pattern = "$", replacement = "", x = money)
+```
+
+```{r}
+money = "$money"
+sub(pattern = "\\$", replacement = "", x = money)
 ```
