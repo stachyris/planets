@@ -1,0 +1,25 @@
+---
+title: "class03Oct"
+format: html
+editor: visual
+---
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+df <- data.frame(c(1,3,5,8,10,15))
+
+df$a = letters[1:6]
+df$b = LETTERS[1:6]
+str(df)
+```
+
+```{r}
+df = mutate_if(.tbl = df, .predicate = is.factor, .funs = as.character)
+str(df)
+```
+
+```{}
+```
