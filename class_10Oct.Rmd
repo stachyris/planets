@@ -1,0 +1,133 @@
+---
+title: "class_Oct10.Rmd"
+author: "Vinay K L"
+date: "2023-10-10"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Regular Expressions continued
+
+## Sequences
+
+\\d - match a digit character - like 0,1,2,3,4
+\\D - opposite of digit charcter - non-digits
+\\s - match a space character
+\\S - match a non-space character
+
+```{r}
+sub("\\d", "_", "Covid 19")
+```
+```{r}
+gsub("\\D", "_", "Covid 19")
+```
+```{r}
+sub("\\s", "_", "Covid 19")
+```
+```{r}
+sub("\\S", "_", "Covid 19")
+```
+
+
+# Character class
+
+[^aeiou] - match anything other than lowercase vowel
+
+```{r}
+d <- c("car", "bike", "plane", "boat", "oct 07", "I-II-III")
+
+#looking for 'e' or 'i'
+
+grep(pattern = "[ei]", x = d, value = TRUE)
+```
+```{r}
+grep(pattern = "[01]", x = d, value = TRUE)
+```
+
+# POSIX Character Classes
+
+[[:lower:]] - lower case letters
+[[:alpha:]] - alphabetic characters
+[[:digit:]] - Digits
+[[:alnum:]] - alphanumeric characters
+[[:punct:]] - puntuation characters
+
+```{r}
+gsub(pattern = "[[:blank:]]", replacement = "", x = d )
+```
+```{r}
+gsub(pattern = "[[:lower:]]", replacement = "_", x = d)
+```
+
+# Quantifiers
+
+Number of times regex needs to run instead of 1 or all
+
+? - zero or at most once
+* - zero or more times
++ - one more more times
+{n} - exactly n times
+{n,} - n or more times
+{n,m} - at least n times but not more than m times. 
+
+```{r}
+sts <- row.names(USArrests)
+
+sts
+```
+
+```{r}
+grep(pattern = "n?", x = sts, value = TRUE)
+```
+
+```{r}
+grep(pattern = "n{2}", sts, value = TRUE)
+```
+
+# position of the pattern within a string
+
+^ - match start of the string
+$ - end of the string
+```{r}
+# \b - matches the empty string at either edge of a word. 
+## \B matches the empty string provided it is not at a naedge of a word
+```
+
+
+```{r}
+strings <- c("abcd", "cdab", "cabd", "c abd")
+grep("ab", strings, value = TRUE)
+```
+
+```{r}
+grep( "^ab", strings, value = TRUE )
+```
+
+```{r}
+grep("ab$", strings, value = TRUE)
+```
+```{r}
+grep("\\bab", strings, value = TRUE)
+```
+
+```{r}
+grep("\\Bab", strings, value = TRUE)
+grep("ab\\B", strings, value = TRUE)
+```
+
+
+# Operators 
+. matches any single character
+[...] - matches any one of the characters inside the bracket
+[^...] - matches any other char except those inside the brackets
+
+
+# Web scrapping
+
+

@@ -23,8 +23,6 @@ str(df)
 
 Strings and regular expressions
 
-
-
 ```{r}
 (empty_str <- "")
 class(empty_str)
