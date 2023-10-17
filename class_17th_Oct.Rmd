@@ -1,0 +1,18 @@
+---
+title: "17th_Oct_Class"
+author: "Vinay K L"
+date: "2023-10-17"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Data Input and Output
+
+```{r}
+Z <- scan()
+```
+
+
