@@ -1,0 +1,72 @@
+---
+title: "class_19th_Oct"
+author: "Vinay K L"
+date: "2023-10-19"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+install.packages("neonDivData", dependencies = TRUE, repos = 'https://daijiang.r-universe.dev')
+```
+
+```{r, warning=FALSE}
+library(neonDivData)
+library(dplyr)
+```
+
+```{r}
+data_bird <- neonDivData::data_bird[, c("siteID", "plotID","pointID", "observation_datetime","taxon_id","taxon_name", "taxon_rank","value","unit","variable_name", "latitude", "longitude","elevation")]
+DT::datatable(head(data_bird, n = 100))
+```
+
+```{r}
+str(neonDivData::data_bird)
+```
+```{r}
+table(neonDivData::data_bird$taxon_rank)
+```
+
+```{r}
+# Subsetting using tidyverse
+data_bird[, c("siteID", "plotID", "pointID", "observation_datetime",
+              "taxon_id", "taxon_name", "taxon_rank", 
+              "latitude", "longitude", "elevation")]
+```
+
+```{r}
+#using dplyr
+select(data_bird, siteID, plotID, pointID, date_time = observation_datetime,
+       starts_with("taxon"),
+       latitude, longitude, elevation)
+```
+
+```{r}
+select(data_bird, ends_with("name"))
+```
+
+```{r}
+select(data_bird, where(is.numeric))
+```
+```{r}
+select(data_bird, latitude, longitude, everything())
+```
+```{r}
+# filter a AND b
+filter(data_bird, plotID == "BART_025", pointID == "C1")
+```
+```{r}
+# Filter a OR b
+filter(data_bird, plotID == "BART_025" | pointID == "C1")
+
+```
+
+```{r}
+mutate(data_bird, new_column = value * 10)
+```
+
