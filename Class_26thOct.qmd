@@ -1,0 +1,157 @@
+---
+title: "class_26th_Oct"
+format: html
+editor: visual
+---
+
+##  Adding information from another data frame
+
+```{r}
+neonDivData::neon_sites
+```
+
+Graphics in base r
+
+```{r}
+plot(cars$dist, cars$speed)
+
+
+```
+
+```{r}
+plot(cars$dist, cars$speed, pch = 10, cex = 1.2, col = "red")
+
+```
+
+```{r}
+if(!require("ape")) install.packages("ape")
+```
+
+```{r}
+tree = ape::rtree(n = 10)
+plot(tree)
+```
+
+```{r}
+hist(cars$speed, col = "green")
+```
+
+```{r}
+hist(rnorm(n = 1000, mean = 2, sd = 2), col = "cyan")
+```
+
+```{r}
+boxplot(mtcars$mpg)
+```
+
+```{r}
+boxplot(mtcars$mpg ~ mtcars$cyl, col = "red")
+```
+
+```{r, warning=FALSE}
+pdf(file = "box_plot_demo.pdf", width = 7, height = 5)
+boxplot(mtcars$mpg ~ mtcars$cyl, col = "red")
+dev.off()
+```
+
+```{r, warning=FALSE}
+pdf(file = "multi_fig_demo.pdf", width = 7, height = 5, onefile = TRUE)
+for(i in 1:8){
+  set.seed(i)
+  plot(1:10, rnorm(10), col = "darkgreen", cex = 2)
+}
+dev.off()
+```
+
+# Graphing with ggplot2
+
+General syntax - ggplot()+aes()+geom()
+
+```{r}
+head(iris)
+```
+
+```{r}
+library(ggplot2)
+ggplot(data = iris)
+```
+
+```{r}
+ggplot(data = iris) +
+  geom_point(aes(x = Sepal.Length, y = Sepal.Width))
+```
+
+```{r}
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
+  geom_point()
+```
+
+```{r}
+myplot <- ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width))
+myplot + geom_point(size = 5)
+```
+
+```{r}
+myplot + geom_point(aes(color = Species), size = 2)
+```
+
+```{r}
+myplot + geom_point(aes(color = Species, shape = Species), size = 2)
+```
+
+```{r}
+set.seed(123)
+d <- diamonds[sample(1:nrow(diamonds), 1000), ]
+```
+
+```{r}
+ggplot(data = d, aes(x = carat, y = price)) +
+  geom_point(aes(color = color ))
+```
+
+```{r}
+ggplot(mtcars, aes(x = as.factor(cyl), y = mpg)) +
+  geom_boxplot(aes(color = "yellow"))
+```
+
+```{r}
+ggplot(mtcars, aes(x = as.factor(cyl), y = mpg)) +
+  geom_point(aes(color = "red"))
+```
+
+```{r}
+hist(d2 <- rnorm(n = 1000, mean = 2, sd = 2))
+```
+
+```{r, warning=FALSE}
+ggplot(as.data.frame(d2), aes(x = d2)) +
+  geom_histogram(color = "yellow", fill = "lightblue")
+```
+
+```{r}
+library(dplyr)
+group_by(iris, Species) %>% summarise(l = sum(Sepal.Length))
+```
+
+```{r}
+# Barplot
+ggplot(iris, aes(Species, Sepal.Length)) +
+  geom_col(color = "brown")
+```
+
+```{r}
+(d3 <- tidyr::pivot_longer(iris, -Species))
+
+ggplot(d3, aes(x = Species, y = value, fill = name)) +
+  geom_col()
+```
+
+```{r}
+ggplot(d3, aes(x = Species, y = value, fill = name)) +
+  geom_col(position = "dodge")
+```
+
+```{r}
+ggplot(d3, aes(x = Species, y = value, fill = Species)) +
+  geom_col(position = "dodge")
+```
